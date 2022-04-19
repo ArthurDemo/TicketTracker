@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using TicketTracker.Entity.Exceptions;
 using TicketTracker.Entity.PrimitiveTypes;
 
 namespace TicketTracker.Entity
@@ -65,7 +66,8 @@ namespace TicketTracker.Entity
 
         public void ChangeEmail(string email)
         {
-            if (string.IsNullOrWhiteSpace(email) || Regex.IsMatch(email, @"^[^@\s] +@[^@\s] +\.[^@\s]+$")) throw new ArgumentException();
+            if (string.IsNullOrWhiteSpace(email) || Regex.IsMatch(email, @"^[^@\s] +@[^@\s] +\.[^@\s]+$"))
+                throw new EmailFormatIsIncorrectException(nameof(email));
 
             Email = email;
             ModifiedDate = DateTimer.Now;
@@ -73,7 +75,7 @@ namespace TicketTracker.Entity
 
         public void ChangePassword(string password)
         {
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException();
+            if (string.IsNullOrWhiteSpace(password)) throw new PasswordFormatIsIncorrectException(nameof(password));
 
             Password = password;
             ModifiedDate = DateTimer.Now;

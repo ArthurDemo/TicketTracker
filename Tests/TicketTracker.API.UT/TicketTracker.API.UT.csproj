@@ -12,11 +12,12 @@
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.0" />
-    <PackageReference Include="Shouldly" Version="4.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TicketTracker.Entity\TicketTracker.Entity.csproj" />
+    <ProjectReference Include="..\..\TicketTracker.API\TicketTracker.API.csproj" />
+    <ProjectReference Include="..\..\TicketTracker.Application\TicketTracker.Application.csproj" />
+    <ProjectReference Include="..\..\TicketTracker.Entity\TicketTracker.Entity.csproj" />
   </ItemGroup>
 
 </Project>

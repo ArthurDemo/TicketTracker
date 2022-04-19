@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MerchantAccounts\Commands\" />
+    <Folder Include="MerchantAccounts\DTOs\" />
+    <Folder Include="MerchantAccounts\Queries\" />
+    <Folder Include="MerchantAccounts\Transformers\" />
+    <Folder Include="Projects\Commands\" />
+    <Folder Include="Projects\DTOs\" />
+    <Folder Include="Projects\Exceptions\" />
+    <Folder Include="Projects\Queries\" />
+    <Folder Include="Tickets\Commands\" />
+    <Folder Include="Tickets\DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketTracker.Entity\TicketTracker.Entity.csproj" />
+    <ProjectReference Include="..\TicketTracker.Infrastructure\TicketTracker.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

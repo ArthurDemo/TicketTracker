@@ -1,5 +1,5 @@
-﻿using TicketTracker.Entity.PrimitiveTypes;
-using System.Data;
+﻿using System.Data;
+using TicketTracker.Entity.PrimitiveTypes;
 
 namespace TicketTracker.Entity
 {

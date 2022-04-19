@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <ProjectReference Include="..\TicketTracker.Entity\TicketTracker.Entity.csproj" />
   </ItemGroup>
 
 </Project>
