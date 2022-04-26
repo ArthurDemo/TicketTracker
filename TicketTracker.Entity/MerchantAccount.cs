@@ -9,12 +9,14 @@ namespace TicketTracker.Entity
 
         public MerchantAccount()
         {
+            Id = MerchantAccountId.Default;
             Account = AccountId.Default;
             WorkSpaces = new List<WorkSpace>();
         }
 
-        private MerchantAccount(AccountId account, List<WorkSpace>? workSpaces = null)
+        private MerchantAccount(MerchantAccountId id, AccountId account, List<WorkSpace>? workSpaces = null)
         {
+            Id = id;
             Account = account;
             WorkSpaces = workSpaces;
         }
@@ -23,17 +25,29 @@ namespace TicketTracker.Entity
 
         #region Properties
 
+        public MerchantAccountId Id { get; private set; }
+
         public AccountId Account { get; private set; }
 
         public List<WorkSpace>? WorkSpaces { get; private set; }
 
         #endregion Properties
 
-        public static MerchantAccount Create(AccountId account, List<WorkSpace>? workSpaces = null)
+        public static MerchantAccount? Create(AccountId account, List<WorkSpace>? workSpaces = null)
         {
             if (account == null) throw new ArgumentNullException(nameof(account));
             workSpaces ??= new List<WorkSpace>();
-            return new MerchantAccount(account, workSpaces);
+            return new MerchantAccount(new MerchantAccountId(GuidMaker.NewGuid()), account, workSpaces);
+        }
+
+        public static MerchantAccount Create(MerchantAccountId id, AccountId account,
+            List<WorkSpace>? workSpaces = null)
+        {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (account == null) throw new ArgumentNullException(nameof(account));
+            workSpaces ??= new List<WorkSpace>();
+
+            return new MerchantAccount(id, account, workSpaces);
         }
 
         #region Public Methods
@@ -62,7 +76,7 @@ namespace TicketTracker.Entity
 
     public record MerchantAccountId(Guid Id) : ObjectId<MerchantAccountId>(Id)
     {
-        private static readonly Lazy<MerchantAccountId> DefaultValue = new(new MerchantAccountId(Guid.NewGuid()));
+        private static readonly Lazy<MerchantAccountId> DefaultValue = new(new MerchantAccountId(Guid.Empty));
 
         public static MerchantAccountId Default => DefaultValue.Value;
     }

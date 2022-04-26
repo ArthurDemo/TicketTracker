@@ -18,8 +18,8 @@ namespace TicketTracker.Application.MerchantAccounts
         public Task<PaginatedList<MerchantAccountResult>> Handle(FetchMerchantAccountQuery query, CancellationToken cancellationToken)
         {
             var merchantAccounts = _merchantAccountRepository
-                .Get(o => true, query.PageNo, query.PageSize)
-                .Select(o => new MerchantAccountResult(o.Account, o.WorkSpaces))
+                .Get(o => true, query.PageNo, query.PageSize)!
+                .Select(o => new MerchantAccountResult(o.Id, o.Account, o.WorkSpaces!))
                 .ToList();
 
             return Task.FromResult(new PaginatedList<MerchantAccountResult>(

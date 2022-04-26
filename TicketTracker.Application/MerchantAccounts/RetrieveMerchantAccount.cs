@@ -17,9 +17,9 @@ namespace TicketTracker.Application.MerchantAccounts
 
         public Task<MerchantAccountResult> Handle(RetrieveMerchantAccountQuery query, CancellationToken cancellationToken)
         {
-            var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(query.AccountId));
+            var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(query.MerchantAccountId));
 
-            return Task.FromResult(new MerchantAccountResult(merchantAccount.Account, merchantAccount.WorkSpaces));
+            return Task.FromResult(new MerchantAccountResult(merchantAccount!.Id, merchantAccount!.Account, merchantAccount.WorkSpaces!));
         }
     }
 }

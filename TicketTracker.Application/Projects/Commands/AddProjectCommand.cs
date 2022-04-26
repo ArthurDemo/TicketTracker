@@ -5,11 +5,11 @@ namespace TicketTracker.Application.Projects.Commands;
 
 public class AddProjectCommand : IRequest<CommandResult>
 {
-    public Guid MerchantAccountId { get; set; }
+    public Guid MerchantAccountId { get; init; }
 
-    public string WorkSpaceName { get; set; }
+    public string WorkSpaceName { get; init; } = null!;
 
-    public string ProjectName { get; set; }
+    public string ProjectName { get; init; } = null!;
 
-    public IEnumerable<Guid> ProjectManagerAccountIds { get; set; }
+    public IEnumerable<Guid>? ProjectManagerAccountIds { get; init; }
 }

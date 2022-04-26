@@ -9,13 +9,7 @@
         {
         }
 
-        public static DateTime Now
-        {
-            get
-            {
-                return _injectedDateTime ?? DateTime.Now;
-            }
-        }
+        public static DateTime Now => _injectedDateTime ?? DateTime.Now;
 
         public static IDisposable InjectActualDateTime(DateTime actualDateTime)
         {

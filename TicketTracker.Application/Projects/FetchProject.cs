@@ -26,12 +26,12 @@ namespace TicketTracker.Application.Projects
 
             if (merchantAccount.WorkSpaces is null ||
                 merchantAccount.WorkSpaces.Any(o => o.Name == query.WorkSpaceName) == false ||
-                merchantAccount.WorkSpaces!.SelectMany(o => o.Projects).Any() == false)
+                merchantAccount.WorkSpaces!.SelectMany(o => o.Projects!).Any() == false)
                 throw new ProjectCouldNotFoundException(nameof(merchantAccount.WorkSpaces));
 
             var projectIds = merchantAccount.WorkSpaces.First(o => o.Name == query.WorkSpaceName).Projects;
-            var projects = _projectRepository.Get(o => projectIds.Contains(o.Id), query.PageNo, query.PageSize)
-                .Select(o => new ProjectResult(o.Id, o.Name, o.Tickets, o.ProjectManager.Accounts))
+            var projects = _projectRepository.Get(o => projectIds!.Contains(o.Id), query.PageNo, query.PageSize)!
+                .Select(o => new ProjectResult(o.Id, o.Name, o.Tickets!, o.ProjectManager.Accounts))
                 .ToList();
 
             return Task.FromResult(new PaginatedList<ProjectResult>(projects, projects.Count, query.PageNo, query.PageSize));

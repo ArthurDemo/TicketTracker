@@ -82,7 +82,7 @@ namespace TicketTracker.Entity
 
     public record ProjectId(Guid Id) : ObjectId<ProjectId>(Id)
     {
-        private static readonly Lazy<ProjectId> DefaultValue = new(new ProjectId(Guid.NewGuid()));
+        private static readonly Lazy<ProjectId> DefaultValue = new(new ProjectId(Guid.Empty));
 
         public static ProjectId Default => DefaultValue.Value;
 

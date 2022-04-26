@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using TicketTracker.Application._Common.Models;
 using TicketTracker.Application.MerchantAccounts.Commands;
-using TicketTracker.Application.MerchantAccounts.Transformers;
 using TicketTracker.Entity;
 using TicketTracker.Entity.Exceptions;
 using TicketTracker.Entity.Repositories;
@@ -22,8 +21,11 @@ namespace TicketTracker.Application.MerchantAccounts
             var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
 
             if (merchantAccount == null) throw new MerchantAccountCouldNotFoundException(nameof(merchantAccount));
+            if (merchantAccount.WorkSpaces!.FirstOrDefault(o => o.Name == command.WorkSpaceName) is var workSpace &&
+                workSpace is null)
+                throw new WorkSpaceCouldNotFoundException(nameof(workSpace));
 
-            merchantAccount.RemoveWorkSpace(WorkSpaceTransform.ExtractWorkSpaceParameter(command));
+            merchantAccount.RemoveWorkSpace(workSpace!);
 
             _merchantAccountRepository.Update(merchantAccount);
 

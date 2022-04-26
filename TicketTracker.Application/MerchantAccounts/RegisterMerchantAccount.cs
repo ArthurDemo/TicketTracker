@@ -21,7 +21,7 @@ namespace TicketTracker.Application.MerchantAccounts
             var (accountId, workSpaces) = ExtractMerchantAccountParameter(command);
 
             var merchantAccount = MerchantAccount.Create(accountId, workSpaces);
-            _merchantAccountRepository.Add(merchantAccount);
+            _merchantAccountRepository.Add(merchantAccount!);
 
             return Task.FromResult(new CommandResult());
         }

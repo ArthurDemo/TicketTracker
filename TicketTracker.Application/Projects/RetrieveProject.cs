@@ -19,7 +19,7 @@ namespace TicketTracker.Application.Projects
         {
             var project = _projectRepository.GetById(new ProjectId(request.ProjectId));
 
-            return Task.FromResult(new ProjectResult(project.Id, project.Name, project.Tickets, project.ProjectManager.Accounts));
+            return Task.FromResult(new ProjectResult(project!.Id, project.Name, project.Tickets!, project.ProjectManager.Accounts));
         }
     }
 }

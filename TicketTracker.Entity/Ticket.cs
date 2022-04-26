@@ -156,7 +156,7 @@ namespace TicketTracker.Entity
 
     public record TicketId(Guid Id) : ObjectId<TicketId>(Id)
     {
-        private static readonly Lazy<TicketId> DefaultValue = new(new TicketId(Guid.NewGuid()));
+        private static readonly Lazy<TicketId> DefaultValue = new(new TicketId(GuidMaker.NewGuid()));
 
         public static TicketId Default => DefaultValue.Value;
     }
@@ -190,7 +190,7 @@ namespace TicketTracker.Entity
         #region Factory Methods
 
         public static Comment Create(string content, AccountId creator)
-            => Create(Guid.NewGuid(), content, creator, null, DateTimer.Now);
+            => Create(GuidMaker.NewGuid(), content, creator, null, DateTimer.Now);
 
         public static Comment Create(Guid id, string content, AccountId? creatorId, AccountId? editorId, DateTime? createDate,
             DateTime? modifiedDate = null)

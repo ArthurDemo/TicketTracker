@@ -12,13 +12,14 @@ namespace TicketTracker.Application._Common.Behaviors
             _logger = logger;
         }
 
-        public async Task Process(TRequest request, CancellationToken cancellationToken)
+        public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
-            var userName = string.Empty;
 
             _logger.LogInformation("TicketTracker Request: {Name} {@Request}",
                 requestName, request);
+
+            return Task.CompletedTask;
         }
     }
 }

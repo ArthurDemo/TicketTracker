@@ -1,12 +1,11 @@
 ﻿using MediatR;
 using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.MerchantAccounts.Transformers;
 
 namespace TicketTracker.Application.MerchantAccounts.Commands;
 
-public class RemoveWorkSpaceCommand : IRequest<CommandResult>, IWorkSpaceParameter
+public class RemoveWorkSpaceCommand : IRequest<CommandResult>
 {
-    public Guid MerchantAccountId { get; set; }
+    public Guid MerchantAccountId { get; init; }
 
-    public (string name, IEnumerable<Guid> projectIds, uint upperLimit) WorkSpace { get; set; }
+    public string WorkSpaceName { get; init; } = null!;
 }

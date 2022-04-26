@@ -7,13 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Projects\Exceptions\**" />
+    <EmbeddedResource Remove="Projects\Exceptions\**" />
+    <None Remove="Projects\Exceptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="MerchantAccounts\Commands\" />
     <Folder Include="MerchantAccounts\DTOs\" />
     <Folder Include="MerchantAccounts\Queries\" />
     <Folder Include="MerchantAccounts\Transformers\" />
     <Folder Include="Projects\Commands\" />
     <Folder Include="Projects\DTOs\" />
-    <Folder Include="Projects\Exceptions\" />
     <Folder Include="Projects\Queries\" />
     <Folder Include="Tickets\Commands\" />
     <Folder Include="Tickets\DTOs\" />
