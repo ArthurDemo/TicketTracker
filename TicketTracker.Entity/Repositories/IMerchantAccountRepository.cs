@@ -1,8 +1,7 @@
 ﻿using TicketTracker.Entity.PrimitiveTypes;
 
-namespace TicketTracker.Entity.Repositories
+namespace TicketTracker.Entity.Repositories;
+
+public interface IMerchantAccountRepository : IRepository<MerchantAccount, MerchantAccountId>
 {
-    public interface IMerchantAccountRepository : IRepository<MerchantAccount, MerchantAccountId>
-    {
-    }
 }

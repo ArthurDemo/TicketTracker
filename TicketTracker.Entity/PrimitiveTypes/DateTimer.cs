@@ -1,26 +1,24 @@
-﻿namespace TicketTracker.Entity.PrimitiveTypes
+﻿namespace TicketTracker.Entity.PrimitiveTypes;
+
+public class DateTimer : IDisposable
 {
-    public class DateTimer : IDisposable
+    private static ThreadLocal<DateTime?>? _injectedDateTime = new(() => DateTime.Now);
+
+    private DateTimer()
     {
-        [ThreadStatic]
-        private static DateTime? _injectedDateTime;
+    }
 
-        private DateTimer()
-        {
-        }
+    public static DateTime Now => _injectedDateTime!.Value!.Value;
 
-        public static DateTime Now => _injectedDateTime ?? DateTime.Now;
+    public void Dispose()
+    {
+        _injectedDateTime?.Dispose();
+    }
 
-        public static IDisposable InjectActualDateTime(DateTime actualDateTime)
-        {
-            _injectedDateTime = actualDateTime;
+    public static IDisposable InjectActualDateTime(DateTime actualDateTime)
+    {
+        _injectedDateTime = new ThreadLocal<DateTime?>(() => actualDateTime);
 
-            return new DateTimer();
-        }
-
-        public void Dispose()
-        {
-            _injectedDateTime = null;
-        }
+        return new DateTimer();
     }
 }

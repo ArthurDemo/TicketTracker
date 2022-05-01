@@ -1,7 +1,4 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-
-namespace TicketTracker.Application.MerchantAccounts.Commands;
+﻿namespace TicketTracker.Application.MerchantAccounts.Commands;
 
 public class RemoveWorkSpaceCommand : IRequest<CommandResult>
 {

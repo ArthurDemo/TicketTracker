@@ -1,8 +1,7 @@
 ﻿using TicketTracker.Entity.PrimitiveTypes;
 
-namespace TicketTracker.Entity.Repositories
+namespace TicketTracker.Entity.Repositories;
+
+public interface IProjectRepository : IRepository<Project, ProjectId>
 {
-    public interface IProjectRepository : IRepository<Project, ProjectId>
-    {
-    }
 }

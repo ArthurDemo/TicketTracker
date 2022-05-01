@@ -1,7 +1,9 @@
-﻿using NUnit.Framework;
-using Shouldly;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using NUnit.Framework;
+
+using Shouldly;
 
 namespace TicketTracker.Entity.UT
 {
@@ -14,7 +16,7 @@ namespace TicketTracker.Entity.UT
             var ticketIds = new List<TicketId>(3)
             {
                 new(Guid.NewGuid()),
-                new TicketId(Guid.NewGuid())
+                new(Guid.NewGuid())
             };
             var project = Project.Create("Project1", new ProjectManager(), ticketIds);
 

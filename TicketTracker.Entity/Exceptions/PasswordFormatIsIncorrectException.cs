@@ -1,8 +1,17 @@
-﻿namespace TicketTracker.Entity.Exceptions;
+﻿using TicketTracker.Entity.PrimitiveTypes;
 
-public class PasswordFormatIsIncorrectException : ArgumentNullException
+namespace TicketTracker.Entity.Exceptions;
+
+public class PasswordFormatIsIncorrectException : SpecException<PasswordFormatIsIncorrectException>
 {
+    private const string itemName = "密碼";
+
+    public PasswordFormatIsIncorrectException()
+    {
+    }
+
     public PasswordFormatIsIncorrectException(string parameterName)
-        : base(parameterName, "密碼不得為空")
-    { }
+        : base(itemName, parameterName)
+    {
+    }
 }

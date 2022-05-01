@@ -1,6 +1,4 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.MerchantAccounts.DTOs;
+﻿using TicketTracker.Application.MerchantAccounts.DTOs;
 
 namespace TicketTracker.Application.MerchantAccounts.Queries;
 

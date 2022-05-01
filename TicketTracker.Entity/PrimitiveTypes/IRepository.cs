@@ -1,21 +1,20 @@
 ﻿using System.Linq.Expressions;
 
-namespace TicketTracker.Entity.PrimitiveTypes
+namespace TicketTracker.Entity.PrimitiveTypes;
+
+public interface IRepository<T, in TId>
 {
-    public interface IRepository<T, in TId>
-    {
-        IEnumerable<T>? Get(Expression<Func<T, bool>> filterSpec, int pageNo, int pageSize);
+    IEnumerable<T>? Get(Expression<Func<T, bool>> filterSpec, int pageNo, int pageSize);
 
-        T? GetBy(Expression<Func<T, bool>> filterSpec);
+    T? GetBy(Expression<Func<T, bool>> filterSpec);
 
-        T? GetById(TId id);
+    T? GetById(TId id);
 
-        void Add(T entity);
+    void Add(T entity);
 
-        void Update(T entity);
+    void Update(T entity);
 
-        void Delete(T entity);
+    void Delete(T entity);
 
-        void DeleteById(TId id);
-    }
+    void DeleteById(TId id);
 }

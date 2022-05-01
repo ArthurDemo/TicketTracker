@@ -1,9 +1,17 @@
-﻿namespace TicketTracker.Entity.Exceptions;
+﻿using TicketTracker.Entity.PrimitiveTypes;
 
-public class WorkSpaceCouldNotFoundException : ArgumentNullException
+namespace TicketTracker.Entity.Exceptions;
+
+public class WorkSpaceCouldNotFoundException : ObjectNullException<WorkSpaceCouldNotFoundException>
 {
+    private const string entityName = "工作域";
+
+    public WorkSpaceCouldNotFoundException()
+    {
+    }
+
     public WorkSpaceCouldNotFoundException(string parameterName)
-        : base(parameterName, "找不到指定的工作域或不存在")
+        : base(entityName, parameterName)
     {
     }
 }

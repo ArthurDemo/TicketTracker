@@ -1,9 +1,17 @@
-﻿namespace TicketTracker.Entity.Exceptions;
+﻿using TicketTracker.Entity.PrimitiveTypes;
 
-public class MerchantAccountCouldNotFoundException : ArgumentNullException
+namespace TicketTracker.Entity.Exceptions;
+
+public class MerchantAccountCouldNotFoundException : ObjectNullException<MerchantAccountCouldNotFoundException>
 {
+    private const string entityName = "商戶帳號";
+
+    public MerchantAccountCouldNotFoundException()
+    {
+    }
+
     public MerchantAccountCouldNotFoundException(string parameterName)
-        : base(parameterName, "商戶帳號無法使用或不存在")
+        : base(entityName, parameterName)
     {
     }
 }

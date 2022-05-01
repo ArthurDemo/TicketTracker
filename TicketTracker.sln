@@ -13,11 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketTracker.Application.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F9F1A2CB-9105-4592-8B8B-DDE0360F906F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketTracker.Infrastructure", "TicketTracker.Infrastructure\TicketTracker.Infrastructure.csproj", "{57C7CAAB-5982-4DCF-9BD8-712ED6B04929}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketTracker.Infrastructure", "TicketTracker.Infrastructure\TicketTracker.Infrastructure.csproj", "{57C7CAAB-5982-4DCF-9BD8-712ED6B04929}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketTracker.API", "TicketTracker.API\TicketTracker.API.csproj", "{2C548DB6-C209-481E-B7B0-7A8BF315CB1F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketTracker.API.UT", "Tests\TicketTracker.API.UT\TicketTracker.API.UT.csproj", "{048BE9DD-1036-49E0-AE03-97741819E712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketTracker.API.UT", "Tests\TicketTracker.API.UT\TicketTracker.API.UT.csproj", "{048BE9DD-1036-49E0-AE03-97741819E712}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +43,6 @@ Global
 		{57C7CAAB-5982-4DCF-9BD8-712ED6B04929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C7CAAB-5982-4DCF-9BD8-712ED6B04929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C7CAAB-5982-4DCF-9BD8-712ED6B04929}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C548DB6-C209-481E-B7B0-7A8BF315CB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C548DB6-C209-481E-B7B0-7A8BF315CB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C548DB6-C209-481E-B7B0-7A8BF315CB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C548DB6-C209-481E-B7B0-7A8BF315CB1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{048BE9DD-1036-49E0-AE03-97741819E712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{048BE9DD-1036-49E0-AE03-97741819E712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{048BE9DD-1036-49E0-AE03-97741819E712}.Release|Any CPU.ActiveCfg = Release|Any CPU

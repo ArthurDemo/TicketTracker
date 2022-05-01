@@ -1,4 +1,3 @@
-﻿namespace TicketTracker.Entity.PrimitiveTypes
-{
-    public abstract record LineItem(Guid Id, string Name);
-}
+﻿namespace TicketTracker.Entity.PrimitiveTypes;
+
+public abstract record LineItem(Guid Id, string Name);

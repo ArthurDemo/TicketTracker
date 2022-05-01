@@ -16,7 +16,7 @@ namespace TicketTracker.Entity.UT
             var newAccountId = new AccountId(Guid.Parse("90258307-910A-4D41-8CC3-F0AEF75AAAF0"));
             var sut = MerchantAccount.Create(originalAccountId);
 
-            sut.ChangeAccount(newAccountId);
+            sut!.ChangeAccount(newAccountId);
 
             sut.Account!.ToString().ShouldBe(newAccountId.ToString());
         }
@@ -31,7 +31,7 @@ namespace TicketTracker.Entity.UT
                     WorkSpace.Create("WS2",1)
                 });
 
-            sut.AddWorkSpace(WorkSpace.Create("NewWorkSpace", 3));
+            sut!.AddWorkSpace(WorkSpace.Create("NewWorkSpace", 3));
 
             sut.WorkSpaces!.Count.ShouldBe(3);
         }
@@ -48,7 +48,7 @@ namespace TicketTracker.Entity.UT
                     removableWorkSpace
                 });
 
-            sut.RemoveWorkSpace(removableWorkSpace);
+            sut!.RemoveWorkSpace(removableWorkSpace);
 
             sut.WorkSpaces!.Count.ShouldBe(2);
         }

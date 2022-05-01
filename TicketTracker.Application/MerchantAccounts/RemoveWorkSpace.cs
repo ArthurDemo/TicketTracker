@@ -1,35 +1,31 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.MerchantAccounts.Commands;
-using TicketTracker.Entity;
-using TicketTracker.Entity.Exceptions;
-using TicketTracker.Entity.Repositories;
+﻿using TicketTracker.Application.MerchantAccounts.Commands;
 
-namespace TicketTracker.Application.MerchantAccounts
+namespace TicketTracker.Application.MerchantAccounts;
+
+public class RemoveWorkSpace : IRequestHandler<RemoveWorkSpaceCommand, CommandResult>
 {
-    public class RemoveWorkSpace : IRequestHandler<RemoveWorkSpaceCommand, CommandResult>
+    private readonly IMerchantAccountRepository _merchantAccountRepository;
+
+    public RemoveWorkSpace(IMerchantAccountRepository merchantAccountRepository)
     {
-        private readonly IMerchantAccountRepository _merchantAccountRepository;
+        _merchantAccountRepository=merchantAccountRepository;
+    }
 
-        public RemoveWorkSpace(IMerchantAccountRepository merchantAccountRepository)
-        {
-            _merchantAccountRepository = merchantAccountRepository;
-        }
+    public Task<CommandResult> Handle(RemoveWorkSpaceCommand command, CancellationToken cancellationToken)
+    {
+        var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
 
-        public Task<CommandResult> Handle(RemoveWorkSpaceCommand command, CancellationToken cancellationToken)
-        {
-            var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
+        MerchantAccountCouldNotFoundException.ThrowIfNull(merchantAccount);
+        WorkSpaceCouldNotFoundException.ThrowIfNull(merchantAccount!.WorkSpaces);
 
-            if (merchantAccount == null) throw new MerchantAccountCouldNotFoundException(nameof(merchantAccount));
-            if (merchantAccount.WorkSpaces!.FirstOrDefault(o => o.Name == command.WorkSpaceName) is var workSpace &&
-                workSpace is null)
-                throw new WorkSpaceCouldNotFoundException(nameof(workSpace));
+        if (merchantAccount.WorkSpaces!.FirstOrDefault(o => o.Name==command.WorkSpaceName) is var workSpace&&
+            workSpace is null)
+            throw new WorkSpaceCouldNotFoundException(nameof(workSpace));
 
-            merchantAccount.RemoveWorkSpace(workSpace!);
+        merchantAccount.RemoveWorkSpace(workSpace!);
 
-            _merchantAccountRepository.Update(merchantAccount);
+        _merchantAccountRepository.Update(merchantAccount);
 
-            return Task.FromResult(new CommandResult(true));
-        }
+        return Task.FromResult(new CommandResult());
     }
 }

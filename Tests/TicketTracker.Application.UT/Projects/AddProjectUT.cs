@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using FluentAssertions;
+
+using MediatR;
+
 using NSubstitute.Extensions;
 
 namespace TicketTracker.Application.UT.Projects
@@ -20,10 +23,10 @@ namespace TicketTracker.Application.UT.Projects
             var sut = new AddProject(projectRepository, mediator);
             var actualResult = await sut.Handle(new AddProjectCommand()
             {
-                MerchantAccountId = merchantAccountId,
-                ProjectManagerAccountIds = new List<Guid>() { projectId },
-                ProjectName = "PJ1",
-                WorkSpaceName = "WS1"
+                MerchantAccountId=merchantAccountId,
+                ProjectManagerAccountIds=new List<Guid>() { projectId },
+                ProjectName="PJ1",
+                WorkSpaceName="WS1"
             }, CancellationToken.None);
 
             actualResult.IsSuccess.ShouldBeTrue();
@@ -31,6 +34,18 @@ namespace TicketTracker.Application.UT.Projects
             await mediator.ReceivedWithAnyArgs().Publish<AddedProject>(
                 new AddedProject(merchantAccountId, "WS1", new ProjectId(projectId), GuidMaker.NewGuid()),
                 CancellationToken.None);
+        }
+
+        [Test]
+        public async Task Should_Throw_An_Exception_When_Add_A_Project_Given_Specific_MerchantAccount_Does_Not_Exist()
+        {
+            var projectRepository = Substitute.For<IProjectRepository>();
+            var mediator = Substitute.For<IMediator>();
+            var sut = new AddProject(projectRepository, mediator);
+
+            Func<Task> action = () => sut.Handle(new AddProjectCommand(), CancellationToken.None);
+
+            await action.Should().ThrowAsync<ArgumentNullException>();
         }
 
         private static IProjectRepository GenProjectRepository(List<Project> projectDataBase)

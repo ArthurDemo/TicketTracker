@@ -1,5 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
+
 using Shouldly;
+
+using TicketTracker.Entity.Exceptions;
 
 namespace TicketTracker.Entity.UT
 {
@@ -15,6 +20,17 @@ namespace TicketTracker.Entity.UT
             sut.ChangeEmail(newEmail);
 
             sut.Email.ShouldBe(newEmail);
+        }
+
+        [Test]
+        public void Should_Throw_Exception_When_Change_Email_And_Email_Is_Empty_String()
+        {
+            var newEmail = string.Empty;
+            var sut = Account.Create("a@b.c", "1234");
+
+            Action action = () => sut.ChangeEmail(newEmail);
+
+            action.ShouldThrow<EmailFormatIsIncorrectException>();
         }
 
         [Test]

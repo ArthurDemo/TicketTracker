@@ -1,9 +1,17 @@
-﻿namespace TicketTracker.Entity.Exceptions;
+﻿using TicketTracker.Entity.PrimitiveTypes;
 
-public class ProjectCouldNotFoundException : ArgumentNullException
+namespace TicketTracker.Entity.Exceptions;
+
+public class ProjectCouldNotFoundException : ObjectNullException<ProjectCouldNotFoundException>
 {
+    private const string entityName = "專案";
+
+    public ProjectCouldNotFoundException()
+    {
+    }
+
     public ProjectCouldNotFoundException(string parameterName)
-        : base(parameterName, "找不到指定的專案或不存在")
+        : base(entityName, parameterName)
     {
     }
 }

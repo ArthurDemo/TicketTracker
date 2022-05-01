@@ -1,9 +1,4 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.MerchantAccounts.Commands;
-using TicketTracker.Entity;
-using TicketTracker.Entity.Exceptions;
-using TicketTracker.Entity.Repositories;
+﻿using TicketTracker.Application.MerchantAccounts.Commands;
 
 namespace TicketTracker.Application.MerchantAccounts;
 
@@ -13,14 +8,14 @@ public class RemoveMerchantAccount : IRequestHandler<RemoveMerchantAccountComman
 
     public RemoveMerchantAccount(IMerchantAccountRepository merchantAccountRepository)
     {
-        _merchantAccountRepository = merchantAccountRepository;
+        _merchantAccountRepository=merchantAccountRepository;
     }
 
     public Task<CommandResult> Handle(RemoveMerchantAccountCommand command, CancellationToken cancellationToken)
     {
         var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
-        if (merchantAccount is null)
-            throw new MerchantAccountCouldNotFoundException(nameof(merchantAccount));
+
+        MerchantAccountCouldNotFoundException.ThrowIfNull(merchantAccount);
 
         _merchantAccountRepository.DeleteById(new MerchantAccountId(command.MerchantAccountId));
 

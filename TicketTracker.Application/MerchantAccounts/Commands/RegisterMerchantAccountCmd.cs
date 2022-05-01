@@ -1,6 +1,4 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.MerchantAccounts.Transformers;
+﻿using TicketTracker.Application.MerchantAccounts.Transformers;
 
 namespace TicketTracker.Application.MerchantAccounts.Commands;
 

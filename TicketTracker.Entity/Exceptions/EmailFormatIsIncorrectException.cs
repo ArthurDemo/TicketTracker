@@ -1,9 +1,17 @@
-﻿namespace TicketTracker.Entity.Exceptions;
+﻿using TicketTracker.Entity.PrimitiveTypes;
 
-public class EmailFormatIsIncorrectException : ArgumentNullException
+namespace TicketTracker.Entity.Exceptions;
+
+public class EmailFormatIsIncorrectException : SpecException<EmailFormatIsIncorrectException>
 {
+    private const string itemName = "Email格式";
+
+    public EmailFormatIsIncorrectException()
+    {
+    }
+
     public EmailFormatIsIncorrectException(string parameterName)
-        : base(parameterName, "Email 格式不正確")
+        : base(itemName, parameterName)
     {
     }
 }

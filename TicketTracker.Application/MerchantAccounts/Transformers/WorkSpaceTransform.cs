@@ -1,6 +1,4 @@
-﻿using TicketTracker.Entity;
-
-namespace TicketTracker.Application.MerchantAccounts.Transformers;
+﻿namespace TicketTracker.Application.MerchantAccounts.Transformers;
 
 public interface IWorkSpaceParameter
 {

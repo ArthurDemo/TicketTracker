@@ -1,6 +1,4 @@
-﻿using MediatR;
-using TicketTracker.Application._Common.Models;
-using TicketTracker.Application.Projects.DTOs;
+﻿using TicketTracker.Application.Projects.DTOs;
 
 namespace TicketTracker.Application.Projects.Queries;
 
