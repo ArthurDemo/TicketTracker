@@ -17,7 +17,7 @@ public class RegisterMerchantAccount : IRequestHandler<RegisterMerchantAccountCm
         var (accountId, workSpaces) = ExtractMerchantAccountParameter(command);
 
         var merchantAccount = MerchantAccount.Create(accountId, workSpaces);
-        _merchantAccountRepository.Add(merchantAccount!);
+        _merchantAccountRepository.Add(merchantAccount!, merchantAccount!.Id);
 
         return Task.FromResult(new CommandResult());
     }

@@ -9,7 +9,7 @@ public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult>
 
     public AddWorkSpace(IMerchantAccountRepository merchantAccountRepository)
     {
-        _merchantAccountRepository=merchantAccountRepository;
+        _merchantAccountRepository = merchantAccountRepository;
     }
 
     public Task<CommandResult> Handle(AddWorkSpaceCommand command, CancellationToken cancellationToken)
@@ -18,7 +18,7 @@ public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult>
 
         MerchantAccountCouldNotFoundException.ThrowIfNull(merchantAccount);
 
-        merchantAccount!.AddWorkSpace(WorkSpaceTransform.ExtractWorkSpaceParameter(command));
+        merchantAccount!.AddWorkSpace(WorkSpaceTransform.ExtractWorkSpaceParameter(command.WorkSpace));
 
         _merchantAccountRepository.Update(merchantAccount);
 

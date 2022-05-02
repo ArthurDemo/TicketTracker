@@ -1,18 +1,15 @@
-﻿namespace TicketTracker.Application.MerchantAccounts.Transformers;
+﻿using TicketTracker.Application.MerchantAccounts.Commands;
 
-public interface IWorkSpaceParameter
-{
-    (string name, IEnumerable<Guid> projectIds, uint upperLimit) WorkSpace { get; set; }
-}
+namespace TicketTracker.Application.MerchantAccounts.Transformers;
 
 public static class WorkSpaceTransform
 {
-    public static WorkSpace ExtractWorkSpaceParameter(IWorkSpaceParameter parameter)
+    public static WorkSpace ExtractWorkSpaceParameter(WorkSpaceParameter parameter)
     {
         var workSpace = WorkSpace.Create(
-            parameter.WorkSpace.name,
-            parameter.WorkSpace.projectIds!.Select(prj => new ProjectId(prj)).ToList(),
-            parameter.WorkSpace.upperLimit);
+            parameter.Name,
+            parameter.ProjectIds!.Select(prj => new ProjectId(prj)).ToList(),
+            parameter.UpperLimit);
         return workSpace;
     }
 }

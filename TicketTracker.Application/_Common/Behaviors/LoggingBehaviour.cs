@@ -1,9 +1,11 @@
 ﻿using MediatR.Pipeline;
+
 using Microsoft.Extensions.Logging;
 
 namespace TicketTracker.Application._Common.Behaviors;
 
-public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
+public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
+    where TRequest : notnull
 {
     private readonly ILogger _logger;
 

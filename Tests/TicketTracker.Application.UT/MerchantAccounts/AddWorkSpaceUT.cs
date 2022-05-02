@@ -17,8 +17,8 @@ namespace TicketTracker.Application.UT.MerchantAccounts
 
             var command = new AddWorkSpaceCommand()
             {
-                MerchantAccountId=GuidMaker.NewGuid(),
-                WorkSpace=new ValueTuple<string, IEnumerable<Guid>, uint>("WS", new[] { GuidMaker.NewGuid() }, 3)
+                MerchantAccountId = GuidMaker.NewGuid(),
+                WorkSpace = new WorkSpaceParameter("WS", new[] { GuidMaker.NewGuid() }, 3)
             };
             var sut = new AddWorkSpace(merchantAccountRepository);
 

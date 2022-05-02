@@ -13,8 +13,8 @@ public class SpecException<T> : ArgumentException
     {
     }
 
-    public SpecException(string itemName, string parameterName, Exception? innerException = null)
-        : base(parameterName, $"規格項目:{itemName},檢查不符合", innerException)
+    public SpecException(string itemName, string failReason, string parameterName, Exception? innerException = null)
+        : base(parameterName, $"規格項目:{itemName},檢查不符合, 錯誤可能原因為: {failReason}", innerException)
     {
     }
 

@@ -1,9 +1,8 @@
-﻿using TicketTracker.Application.MerchantAccounts.Transformers;
+﻿namespace TicketTracker.Application.MerchantAccounts.Commands;
 
-namespace TicketTracker.Application.MerchantAccounts.Commands;
-
-public record AddWorkSpaceCommand : IRequest<CommandResult>, IWorkSpaceParameter
+public record AddWorkSpaceCommand : IRequest<CommandResult>
 {
-    public Guid MerchantAccountId { get; set; }
-    public (string name, IEnumerable<Guid> projectIds, uint upperLimit) WorkSpace { get; set; }
+    public Guid MerchantAccountId { get; init; }
+
+    public WorkSpaceParameter WorkSpace { get; init; } = null!;
 }

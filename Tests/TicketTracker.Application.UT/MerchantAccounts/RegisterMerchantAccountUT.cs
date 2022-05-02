@@ -1,4 +1,5 @@
 ﻿using NSubstitute.Extensions;
+
 using TicketTracker.Application.MerchantAccounts;
 using TicketTracker.Application.MerchantAccounts.Commands;
 
@@ -25,7 +26,7 @@ namespace TicketTracker.Application.UT.MerchantAccounts
         {
             var merchantAccountRepository = Substitute.For<IMerchantAccountRepository>();
             merchantAccountRepository.Configure()
-                .When(o => o.Add(Arg.Any<MerchantAccount>()))
+                .When(o => o.Add(Arg.Any<MerchantAccount>(), Arg.Any<MerchantAccountId>()))
                 .Do(o => dataBase.Add(o.Arg<MerchantAccount>()));
             return merchantAccountRepository;
         }
