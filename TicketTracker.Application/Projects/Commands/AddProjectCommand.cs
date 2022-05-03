@@ -1,6 +1,6 @@
 ﻿namespace TicketTracker.Application.Projects.Commands;
 
-public class AddProjectCommand : IRequest<CommandResult>
+public class AddProjectCommand : IRequest<CommandResult<Project>>
 {
     public Guid MerchantAccountId { get; init; }
 

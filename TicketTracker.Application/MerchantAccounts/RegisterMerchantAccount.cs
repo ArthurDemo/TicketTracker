@@ -3,7 +3,7 @@ using TicketTracker.Application.MerchantAccounts.Transformers;
 
 namespace TicketTracker.Application.MerchantAccounts;
 
-public class RegisterMerchantAccount : IRequestHandler<RegisterMerchantAccountCmd, CommandResult>
+public class RegisterMerchantAccount : IRequestHandler<RegisterMerchantAccountCmd, CommandResult<MerchantAccount>>
 {
     private readonly IMerchantAccountRepository _merchantAccountRepository;
 
@@ -12,14 +12,14 @@ public class RegisterMerchantAccount : IRequestHandler<RegisterMerchantAccountCm
         _merchantAccountRepository = merchantAccountRepository;
     }
 
-    public Task<CommandResult> Handle(RegisterMerchantAccountCmd command, CancellationToken cancellationToken)
+    public Task<CommandResult<MerchantAccount>> Handle(RegisterMerchantAccountCmd command, CancellationToken cancellationToken)
     {
         var (accountId, workSpaces) = ExtractMerchantAccountParameter(command);
 
         var merchantAccount = MerchantAccount.Create(accountId, workSpaces);
         _merchantAccountRepository.Add(merchantAccount!, merchantAccount!.Id);
 
-        return Task.FromResult(new CommandResult());
+        return Task.FromResult(new CommandResult<MerchantAccount>(merchantAccount));
     }
 
     private static (AccountId accountId, List<WorkSpace>? workSpaces) ExtractMerchantAccountParameter(

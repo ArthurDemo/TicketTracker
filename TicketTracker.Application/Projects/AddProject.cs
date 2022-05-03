@@ -3,7 +3,7 @@ using TicketTracker.Application.Projects.Commands;
 
 namespace TicketTracker.Application.Projects;
 
-public class AddProject : IRequestHandler<AddProjectCommand, CommandResult>
+public class AddProject : IRequestHandler<AddProjectCommand, CommandResult<Project>>
 {
     private readonly IMediator _mediator;
     private readonly IProjectRepository _projectRepository;
@@ -14,7 +14,7 @@ public class AddProject : IRequestHandler<AddProjectCommand, CommandResult>
         _mediator = mediator;
     }
 
-    public async Task<CommandResult> Handle(AddProjectCommand command, CancellationToken cancellationToken)
+    public async Task<CommandResult<Project>> Handle(AddProjectCommand command, CancellationToken cancellationToken)
     {
         var project = Project.Create(
             command.ProjectName,
@@ -26,6 +26,6 @@ public class AddProject : IRequestHandler<AddProjectCommand, CommandResult>
             new AddedProject(command.MerchantAccountId, command.WorkSpaceName, project.Id),
             cancellationToken);
 
-        return new CommandResult();
+        return new CommandResult<Project>(project);
     }
 }

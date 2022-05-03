@@ -2,16 +2,16 @@
 
 namespace TicketTracker.Application.MerchantAccounts;
 
-public class RemoveMerchantAccount : IRequestHandler<RemoveMerchantAccountCommand, CommandResult>
+public class RemoveMerchantAccount : IRequestHandler<RemoveMerchantAccountCommand, CommandResult<MerchantAccount>>
 {
     private readonly IMerchantAccountRepository _merchantAccountRepository;
 
     public RemoveMerchantAccount(IMerchantAccountRepository merchantAccountRepository)
     {
-        _merchantAccountRepository=merchantAccountRepository;
+        _merchantAccountRepository = merchantAccountRepository;
     }
 
-    public Task<CommandResult> Handle(RemoveMerchantAccountCommand command, CancellationToken cancellationToken)
+    public Task<CommandResult<MerchantAccount>> Handle(RemoveMerchantAccountCommand command, CancellationToken cancellationToken)
     {
         var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
 
@@ -19,6 +19,6 @@ public class RemoveMerchantAccount : IRequestHandler<RemoveMerchantAccountComman
 
         _merchantAccountRepository.DeleteById(new MerchantAccountId(command.MerchantAccountId));
 
-        return Task.FromResult(new CommandResult());
+        return Task.FromResult(new CommandResult<MerchantAccount>());
     }
 }

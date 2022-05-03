@@ -2,10 +2,11 @@
 
 using TicketTracker.Application._Common.Models;
 using TicketTracker.Application.MerchantAccounts.Commands;
+using TicketTracker.Entity;
 
 namespace TicketTracker.API.APIs.MerchantAccounts.EndPoints;
 
-public class RegisterMerchantAccountEndPoint : Endpoint<RegisterMerchantAccountCmd, CommandResult>
+public class RegisterMerchantAccountEndPoint : Endpoint<RegisterMerchantAccountCmd, CommandResult<MerchantAccount>>
 {
     private readonly IMediator _mediator;
 
@@ -24,6 +25,6 @@ public class RegisterMerchantAccountEndPoint : Endpoint<RegisterMerchantAccountC
     public override async Task HandleAsync(RegisterMerchantAccountCmd cmd, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(cmd, cancellationToken);
-        await SendAsync(result, cancellation: cancellationToken);
+        await SendCreatedAtAsync<RetrieveMerchantAccountEndpoint>(null, result, cancellation: cancellationToken);
     }
 }

@@ -3,7 +3,7 @@ using TicketTracker.Application.MerchantAccounts.Transformers;
 
 namespace TicketTracker.Application.MerchantAccounts;
 
-public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult>
+public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult<MerchantAccount>>
 {
     private readonly IMerchantAccountRepository _merchantAccountRepository;
 
@@ -12,7 +12,7 @@ public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult>
         _merchantAccountRepository = merchantAccountRepository;
     }
 
-    public Task<CommandResult> Handle(AddWorkSpaceCommand command, CancellationToken cancellationToken)
+    public Task<CommandResult<MerchantAccount>> Handle(AddWorkSpaceCommand command, CancellationToken cancellationToken)
     {
         var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
 
@@ -22,6 +22,6 @@ public class AddWorkSpace : IRequestHandler<AddWorkSpaceCommand, CommandResult>
 
         _merchantAccountRepository.Update(merchantAccount);
 
-        return Task.FromResult(new CommandResult());
+        return Task.FromResult(new CommandResult<MerchantAccount>(merchantAccount));
     }
 }

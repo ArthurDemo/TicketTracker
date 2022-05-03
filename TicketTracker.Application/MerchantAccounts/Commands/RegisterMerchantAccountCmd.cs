@@ -1,6 +1,6 @@
 ﻿namespace TicketTracker.Application.MerchantAccounts.Commands;
 
-public record RegisterMerchantAccountCmd : IRequest<CommandResult>
+public record RegisterMerchantAccountCmd : IRequest<CommandResult<MerchantAccount>>
 {
     public Guid AccountId { get; set; }
 

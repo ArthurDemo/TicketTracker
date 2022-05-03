@@ -2,23 +2,23 @@
 
 namespace TicketTracker.Application.MerchantAccounts;
 
-public class RemoveWorkSpace : IRequestHandler<RemoveWorkSpaceCommand, CommandResult>
+public class RemoveWorkSpace : IRequestHandler<RemoveWorkSpaceCommand, CommandResult<MerchantAccount>>
 {
     private readonly IMerchantAccountRepository _merchantAccountRepository;
 
     public RemoveWorkSpace(IMerchantAccountRepository merchantAccountRepository)
     {
-        _merchantAccountRepository=merchantAccountRepository;
+        _merchantAccountRepository = merchantAccountRepository;
     }
 
-    public Task<CommandResult> Handle(RemoveWorkSpaceCommand command, CancellationToken cancellationToken)
+    public Task<CommandResult<MerchantAccount>> Handle(RemoveWorkSpaceCommand command, CancellationToken cancellationToken)
     {
         var merchantAccount = _merchantAccountRepository.GetById(new MerchantAccountId(command.MerchantAccountId));
 
         MerchantAccountCouldNotFoundException.ThrowIfNull(merchantAccount);
         WorkSpaceCouldNotFoundException.ThrowIfNull(merchantAccount!.WorkSpaces);
 
-        if (merchantAccount.WorkSpaces!.FirstOrDefault(o => o.Name==command.WorkSpaceName) is var workSpace&&
+        if (merchantAccount.WorkSpaces!.FirstOrDefault(o => o.Name == command.WorkSpaceName) is var workSpace &&
             workSpace is null)
             throw new WorkSpaceCouldNotFoundException(nameof(workSpace));
 
@@ -26,6 +26,6 @@ public class RemoveWorkSpace : IRequestHandler<RemoveWorkSpaceCommand, CommandRe
 
         _merchantAccountRepository.Update(merchantAccount);
 
-        return Task.FromResult(new CommandResult());
+        return Task.FromResult(new CommandResult<MerchantAccount>());
     }
 }
